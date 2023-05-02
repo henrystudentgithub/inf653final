@@ -6,14 +6,14 @@ Schema
 */
 const state_schema = new Schema({
 
-  state_code: {
+  statecode: {
     type: String,
     required: true,
     unique: true,
     uppercase: true,
   },
 
-  fun_facts: {
+  funfacts: {
     type: [String],
   },
 });
