@@ -39,7 +39,7 @@ const get_all_states = async (req, res) => {
 
 const get_state = async (req, res) => {
 
-  const state = states_json.find((state) => state.code === req.params.state);
+  const state = states_json.find((state) => state.code.toLowerCase() === req.params.state.toLowerCase());
   const db_json = await State.find({ statecode: req.params.state });
   const result = states_with_facts([state], db_json);
 
@@ -51,7 +51,7 @@ const get_state = async (req, res) => {
 
 const get_state_capital = (req, res) => {
 
-  const state = states_json.find((state) => state.code === req.params.state);
+  const state = states_json.find((state) => state.code.toLowerCase() === req.params.state.toLowerCase());
 
 
   res.json({
@@ -63,7 +63,7 @@ const get_state_capital = (req, res) => {
 
 const get_state_nickname = (req, res) => {
 
-  const state = states_json.find((state) => state.code === req.params.state);
+  const state = states_json.find((state) => state.code.toLowerCase() === req.params.state.toLowerCase());
 
 
   res.json({
@@ -75,7 +75,7 @@ const get_state_nickname = (req, res) => {
 
 const get_state_population = (req, res) => {
 
-  const state = states_json.find((state) => state.code === req.params.state);
+  const state = states_json.find((state) => state.code.toLowerCase() === req.params.state.toLowerCase());
 
 
   res.json({
@@ -87,7 +87,7 @@ const get_state_population = (req, res) => {
 
 const get_state_admission = (req, res) => {
 
-  const state = states_json.find((state) => state.code === req.params.state);
+  const state = states_json.find((state) => state.code.toLowerCase() === req.params.state.toLowerCase());
 
 
   res.json({
