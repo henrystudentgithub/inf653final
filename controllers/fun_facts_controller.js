@@ -3,8 +3,8 @@ const states_json = require('../public/json/states.json');
 
 
 const get_random_fact = async (req, res) => {
-  const state = await State.findOne({ state_code: req.params.state });
-  const facts = state?.fun_facts;
+  const state = await State.findOne({ statecode: req.params.state });
+  const facts = state?.funfacts;
 
   if (!facts || facts.length === 0) {
 
@@ -19,26 +19,26 @@ const get_random_fact = async (req, res) => {
     const random_fact = facts[Math.floor(Math.random() * facts.length)];
 
     res.json({
-      fun_fact: random_fact,
+      funfact: random_fact,
     });
   }
 };
 
 const create_fact = async (req, res) => {
-  if (!req?.body?.fun_facts) {
+  if (!req?.body?.funfacts) {
     return res.status(400).json({ message: 'State fun facts value required' });
   }
-  if (!Array.isArray(req.body.fun_facts)) {
+  if (!Array.isArray(req.body.funfacts)) {
     return res
       .status(400)
       .json({ message: 'State fun facts value must be an array' });
   }
 
-  const state = await State.findOne({ state_code: req.params.state }).exec();
+  const state = await State.findOne({ statecode: req.params.state }).exec();
 
   if (state) {
 
-    state.fun_facts.push(...req.body.fun_facts);
+    state.funfacts.push(...req.body.funfacts);
 
 
     const result = await state.save();
@@ -49,8 +49,8 @@ const create_fact = async (req, res) => {
 
     try {
       const result = await State.create({
-        state_code: req.params.state,
-        fun_facts: [...req.body.fun_facts],
+        statecode: req.params.state,
+        funfacts: [...req.body.funfacts],
       });
 
 
@@ -63,9 +63,9 @@ const create_fact = async (req, res) => {
 
 
 const modify_fact = async (req, res) => {
-  const state_code = req?.params?.state;
+  const statecode = req?.params?.state;
   const index = req?.body?.index;
-  const fun_fact = req?.body?.fun_fact;
+  const funfact = req?.body?.funfact;
 
 
   if (!index) {
@@ -74,33 +74,33 @@ const modify_fact = async (req, res) => {
     });
   }
 
-  if (!fun_fact) {
+  if (!funfact) {
     return res.status(400).json({
       message: 'State fun fact value required',
     });
   }
 
 
-  const state = await State.findOne({ state_code: state_code }).exec();
+  const state = await State.findOne({ statecode: statecode }).exec();
 
   if (!state) {
 
     const state_name = states_json.find(
-      (state) => state.code === state_code
+      (state) => state.code === statecode
     ).state;
 
 
     res.json({ message: `No Fun Facts found for ${state_name}` });
-  } else if (!state.fun_facts[index - 1]) {
+  } else if (!state.funfacts[index - 1]) {
 
     const state_name = states_json.find(
-      (state) => state.code === state_code
+      (state) => state.code === statecode
     ).state;
 
     res.json({ message: `No Fun Fact found at that index for ${state_name}` });
   } else {
 
-    state.fun_facts[index - 1] = fun_fact;
+    state.funfacts[index - 1] = funfact;
 
 
     const result = await state.save();
@@ -110,7 +110,7 @@ const modify_fact = async (req, res) => {
 };
 
 const delete_fact = async (req, res) => {
-  const state_code = req?.params?.state;
+  const statecode = req?.params?.state;
   const index = req?.body?.index;
 
   if (!index) {
@@ -119,28 +119,28 @@ const delete_fact = async (req, res) => {
     });
   }
 
-  const state = await State.findOne({ state_code: state_code }).exec();
+  const state = await State.findOne({ statecode: statecode }).exec();
 
   if (!state) {
 
 
     const state_name = states_json.find(
-      (state) => state.code === state_code
+      (state) => state.code === statecode
     ).state;
 
 
     res.json({ message: `No Fun Facts found for ${state_name}` });
-  } else if (!state.fun_facts[index - 1]) {
+  } else if (!state.funfacts[index - 1]) {
 
 
     const state_name = states_json.find(
-      (state) => state.code === state_code
+      (state) => state.code === statecode
     ).state;
 
     res.json({ message: `No Fun Fact found at that index for ${state_name}` });
   } else {
 
-    state.fun_facts.splice(index - 1, 1);
+    state.funfacts.splice(index - 1, 1);
 
 
     const result = await state.save();
