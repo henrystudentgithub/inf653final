@@ -1,5 +1,5 @@
 {
-  "name": "states-api",
+  "name": "inf653final",
   "version": "1.0.0",
   "description": "INF 653 Final",
   "main": "server.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/henrystudentgithub/States.git"
+    "url": "git+https://github.com/henrystudentgithub/inf653final.git"
   },
   "author": "Henry Kobin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/henrystudentgithub/States-API/issues"
+    "url": "https://github.com/henrystudentgithub/inf653final/issues"
   },
-  "homepage": "https://github.com/henrystudentgithub/States-API#readme",
+  "homepage": "https://github.com/henrystudentgithub/inf653final#readme",
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
