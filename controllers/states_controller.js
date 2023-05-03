@@ -97,16 +97,6 @@ const get_state_admission = (req, res) => {
 };
 
 
-module.exports = {
-  get_all_states,
-  get_state,
-  get_state_capital,
-  get_state_nickname,
-  get_state_population,
-  get_state_admission,
-};
-
-
 const states_with_facts = (states_json, db_json) => {
   return states_json.map((stateJson) => {
 
@@ -127,3 +117,14 @@ const states_with_facts = (states_json, db_json) => {
     return result;
   });
 };
+
+module.exports = {
+  get_all_states,
+  get_state,
+  get_state_capital,
+  get_state_nickname,
+  get_state_population,
+  get_state_admission,
+};
+
+
